@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+  width="2048"
+  height="2048"
+  viewBox="0 0 512 512"
+  xmlns="http://www.w3.org/2000/svg">
+
+  <defs>
+    <clipPath id="vinyl-clip">
+      <path d="
+        M256 96
+        C330 96 400 140 416 216
+        C432 292 384 368 304 392
+        C224 416 136 376 112 304
+        C88 232 140 96 256 96
+        Z"/>
+    </clipPath>
+
+    <!-- Mask: black = transparent -->
+    <mask id="cut-outs">
+      <rect width="512" height="512" fill="white"/>
+
+      <!-- Groove rings -->
+      <g clip-path="url(#vinyl-clip)"
+         fill="none"
+         stroke="black"
+         stroke-width="3"
+         transform="matrix(1.6214264,0,0,1.6214264,-169.87249,-144.36062)">
+        <circle cx="256" cy="256" r="165"/>
+        <circle cx="256" cy="256" r="150"/>
+        <circle cx="256" cy="256" r="135"/>
+        <circle cx="256" cy="256" r="120"/>
+      </g>
+
+      <!-- Thick ring as stroke (donut cutout) -->
+      <circle
+        cx="245.21266"
+        cy="270.72458"
+        r="145"
+        fill="none"
+        stroke="black"
+        stroke-width="34"/>
+
+      <!-- Center hole -->
+      <circle
+        cx="245.21266"
+        cy="270.72458"
+        r="25.942825"
+        fill="black"/>
+    </mask>
+  </defs>
+
+  <!-- Visible vinyl -->
+  <path
+    d="m 245.21268,11.296314
+      c 119.98556,0 233.4854,71.342762 259.42823,194.571176
+      C 530.58375,329.0959 452.75526,452.32431 323.04115,491.23854
+      C 193.32703,530.15277 50.641504,465.29573 11.727268,348.55302
+      C -27.186967,231.81031 57.127213,11.296314 245.21268,11.296314 Z"
+    fill="#ffffff"
+    mask="url(#cut-outs)"/>
+</svg>
