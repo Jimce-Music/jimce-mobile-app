@@ -31,17 +31,43 @@ android {
     }
 
     signingConfigs {
-        create("release") {
-            storeFile = file(System.getenv("KEYSTORE_FILE")!!)
-            storePassword = System.getenv("KEYSTORE_PASSWORD")
-            keyAlias = System.getenv("KEY_ALIAS")
-            keyPassword = System.getenv("KEY_PASSWORD")
-        }
+        create("release")
     }
 
     buildTypes {
+        getByName("debug") {
+            applicationIdSuffix = ".debug"
+        }
+
         getByName("release") {
-            signingConfig = signingConfigs.getByName("release")
+            val isReleaseTask = gradle.startParameter.taskNames.any {
+                it.contains("release", ignoreCase = true)
+            }
+
+            if (isReleaseTask) {
+                val keystoreFile = System.getenv("KEYSTORE_FILE")
+                val keystorePassword = System.getenv("KEYSTORE_PASSWORD")
+                val keyAlias = System.getenv("KEY_ALIAS")
+                val keyPassword = System.getenv("KEY_PASSWORD")
+
+                if (
+                    keystoreFile.isNullOrBlank() ||
+                    keystorePassword.isNullOrBlank() ||
+                    keyAlias.isNullOrBlank() ||
+                    keyPassword.isNullOrBlank()
+                ) {
+                    throw GradleException(
+                        "Release-Build abgebrochen: Signing-ENV-Variablen fehlen."
+                    )
+                }
+
+                signingConfig = signingConfigs.getByName("release").apply {
+                    storeFile = file(keystoreFile)
+                    storePassword = keystorePassword
+                    this.keyAlias = keyAlias
+                    this.keyPassword = keyPassword
+                }
+            }
         }
     }
 }
