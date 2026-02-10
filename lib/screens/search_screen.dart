@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
+class SearchScreen extends StatelessWidget {
+  const SearchScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return const Center(
       child: Text(
-        'Willkommen auf dem Home Screen',
+        'Willkommen auf dem Search Screen',
         style: TextStyle(color: Colors.white, fontSize: 24),
       ),
     );

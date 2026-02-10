@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
+class PlaylistScreen extends StatelessWidget {
+  const PlaylistScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return const Center(
       child: Text(
-        'Willkommen auf dem Home Screen',
+        'Willkommen auf dem Playlist Screen',
         style: TextStyle(color: Colors.white, fontSize: 24),
       ),
     );

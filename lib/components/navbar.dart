@@ -21,6 +21,11 @@ class FloatingGlassNavBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Zugriff auf die Theme-Farben
+    final theme = Theme.of(context);
+    final borderColor = theme.colorScheme.outline;
+    final accentColor = theme.colorScheme.primary;
+
     double bottomPadding = MediaQuery.of(context).padding.bottom;
     
     return Padding(
@@ -32,10 +37,7 @@ class FloatingGlassNavBar extends StatelessWidget {
           double usableWidth = totalWidth - 20; 
           double itemWidth = usableWidth / itemCount;
 
-          // Wir suchen den visuellen Index basierend auf der ID, 
-          // damit die Pille immer an der richtigen Stelle steht.
           int visualIndex = navItems.indexWhere((item) => item['id'] == currentIndex);
-          // Falls die ID nicht gefunden wird (Sicherheit), nimm 0
           if (visualIndex == -1) visualIndex = 0;
 
           return ClipRRect(
@@ -45,40 +47,47 @@ class FloatingGlassNavBar extends StatelessWidget {
               child: Container(
                 height: 70,
                 decoration: BoxDecoration(
-                  color: Colors.black.withValues(alpha: 0.75),
+                  color: Colors.black.withValues(alpha: 0.7),
                   borderRadius: BorderRadius.circular(40),
-                  border: Border.all(color: Colors.white.withValues(alpha: 0.1)),
+                  border: Border.all(
+                    color: borderColor.withValues(alpha: 0.5),
+                    width: 1.5,
+                  ),
                 ),
-                child: Stack(
-                  children: [
-                    // DIE WANDERNDE PILLE
-                    AnimatedPositioned(
-                      duration: const Duration(milliseconds: 350),
-                      curve: Curves.easeOutBack,
-                      left: 10 + (visualIndex * itemWidth),
-                      top: 10,
-                      child: Container(
-                        width: itemWidth,
-                        height: 50,
-                        decoration: BoxDecoration(
-                          color: Colors.white.withValues(alpha: 0.15),
-                          borderRadius: BorderRadius.circular(30),
+                // Das Padding hier sorgt dafür, dass die Pille den Border nie berührt
+                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10), 
+                child: LayoutBuilder(
+                  builder: (context, constraints) {
+                    // Die Breite basiert jetzt auf dem bereits reduzierten Platz
+                    double itemWidth = constraints.maxWidth / navItems.length;
+                    int visualIndex = navItems.indexWhere((item) => item['id'] == currentIndex);
+                    if (visualIndex == -1) visualIndex = 0;
+
+                    return Stack(
+                      clipBehavior: Clip.none, // Verhindert unschöne Abschneidungen
+                      children: [
+                        AnimatedPositioned(
+                          duration: const Duration(milliseconds: 350),
+                          curve: Curves.easeOutBack,
+                          left: visualIndex * itemWidth,
+                          top: 0,
+                          bottom: 0, // Pille füllt die vertikale Höhe des Paddings aus
+                          child: Container(
+                            width: itemWidth,
+                            decoration: BoxDecoration(
+                              color: accentColor.withValues(alpha: 0.15),
+                              borderRadius: BorderRadius.circular(30),
+                            ),
+                          ),
                         ),
-                      ),
-                    ),
-                    // DIE ICONS
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 10),
-                      child: Row(
-                        children: navItems.map((item) {
-                          return _buildNavItem(
-                            id: item['id'], 
-                            icon: item['icon'],
-                          );
-                        }).toList(),
-                      ),
-                    ),
-                  ],
+                        Row(
+                          children: navItems.map((item) {
+                            return _buildNavItem(context, id: item['id'], icon: item['icon']);
+                          }).toList(),
+                        ),
+                      ],
+                    );
+                  },
                 ),
               ),
             ),
@@ -88,18 +97,21 @@ class FloatingGlassNavBar extends StatelessWidget {
     );
   }
 
-  Widget _buildNavItem({required int id, required IconData icon}) {
+  // BuildNavItem leicht angepasst für Theme-Farben
+  Widget _buildNavItem(BuildContext context, {required int id, required IconData icon}) {
     bool isSelected = currentIndex == id;
+    final accentColor = Theme.of(context).colorScheme.primary;
 
     return Expanded(
       child: GestureDetector(
-        onTap: () => onTap(id), // Gibt die feste ID zurück
+        onTap: () => onTap(id),
         behavior: HitTestBehavior.opaque,
         child: SizedBox(
           height: 70,
           child: Icon(
             icon,
-            color: isSelected ? Colors.white : Colors.white.withValues(alpha: 0.4),
+            // Bei Auswahl leuchtet das Icon in der Akzentfarbe (Gelb/Gold)
+            color: isSelected ? accentColor : Colors.white.withValues(alpha: 0.4),
             size: 26,
           ),
         ),
