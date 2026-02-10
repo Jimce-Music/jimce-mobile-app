@@ -6,6 +6,7 @@ class AppTheme {
   static const Color _accentPrimary = Color(0xFFEAB308);
   static const Color _textPrimary = Color(0xFFF5F5F5);
   static const Color _textSecondary = Color(0xFFA3A3A3);
+  static const Color _textDisabled = Color(0xFF646464);
   static const Color _borderColor = Color(0xFF262626);
   static const Color _danger = Color(0xFFEF4444);
 
@@ -29,6 +30,7 @@ class AppTheme {
       textTheme: const TextTheme(
         bodyLarge: TextStyle(color: _textPrimary),
         bodyMedium: TextStyle(color: _textSecondary),
+        bodySmall: TextStyle(color: _textDisabled),
       ),
 
       // Fehler 1 gelöst: Der Parameter heißt 'cardTheme', 
