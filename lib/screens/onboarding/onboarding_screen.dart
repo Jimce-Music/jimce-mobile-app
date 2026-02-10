@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:jimce/screens/onboarding/setup/server_setup_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:jimce/app.dart';
 import 'package:jimce/screens/onboarding/onboarding_data.dart';
 import 'package:jimce/screens/onboarding/onboarding_dot_indicator.dart';
 
@@ -17,11 +17,11 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
 
   Future<void> _completeOnboarding() async {
     final prefs = await SharedPreferences.getInstance();
-    await prefs.setBool('isSettedUp', true);
+    await prefs.setBool('finishedOnboarding', true);
     
     if (!mounted) return;
     Navigator.of(context).pushReplacement(
-      MaterialPageRoute(builder: (context) => const MainNavigationWrapper()),
+      MaterialPageRoute(builder: (context) => const ServerSetupScreen()),
     );
   }
 

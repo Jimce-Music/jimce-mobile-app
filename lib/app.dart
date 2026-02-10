@@ -6,14 +6,19 @@ import 'package:jimce/screens/settings_screen.dart';
 import 'package:jimce/screens/onboarding/onboarding_screen.dart';
 import 'package:jimce/components/navbar.dart';
 import 'package:jimce/utils/app_theme.dart';
+import 'package:jimce/screens/onboarding/setup/server_setup_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  Future<bool> _checkOnboardingStatus() async {
+  // Prüft jetzt beide Status-Werte
+  Future<Map<String, bool>> _checkAppState() async {
     final prefs = await SharedPreferences.getInstance();
-    return prefs.getBool('isSettedUp') ?? false;
+    return {
+      'finishedOnboarding': prefs.getBool('finishedOnboarding') ?? false,
+      'isSettedUp': prefs.getBool('isSettedUp') ?? false,
+    };
   }
 
   @override
@@ -21,17 +26,26 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: AppTheme.blackTheme,
-      home: FutureBuilder<bool>(
-        future: _checkOnboardingStatus(),
+      home: FutureBuilder<Map<String, bool>>(
+        future: _checkAppState(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Scaffold(body: Center(child: CircularProgressIndicator()));
           }
 
-          if (snapshot.data == true) {
-            return const MainNavigationWrapper(); 
+          final bool finishedOnboarding = snapshot.data?['finishedOnboarding'] ?? false;
+          final bool isSettedUp = snapshot.data?['isSettedUp'] ?? false;
+
+          // Logik-Weiche:
+          if (!finishedOnboarding) {
+            // 1. Wenn Onboarding nicht fertig -> Onboarding
+            return const OnboardingScreen();
+          } else if (!isSettedUp) {
+            // 2. Wenn Onboarding fertig, aber kein Server-Setup -> Setup Screen
+            return const ServerSetupScreen();
           } else {
-            return const OnboardingScreen(); 
+            // 3. Beides erledigt -> Haupt-App
+            return const MainNavigationWrapper();
           }
         },
       ),
@@ -60,18 +74,10 @@ class _MainNavigationWrapperState extends State<MainNavigationWrapper> {
   Widget build(BuildContext context) {
     return Scaffold(
       extendBody: true,
-      body: SizedBox(
-        width: double.infinity,
-        height: double.infinity,
-        child: _pages[_selectedIndex],
-      ),
+      body: SizedBox.expand(child: _pages[_selectedIndex]),
       bottomNavigationBar: FloatingGlassNavBar(
         currentIndex: _selectedIndex,
-        onTap: (index) {
-          setState(() {
-            _selectedIndex = index;
-          });
-        },
+        onTap: (index) => setState(() => _selectedIndex = index),
       ),
     );
   }
