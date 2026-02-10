@@ -16,7 +16,6 @@ class AppTheme {
       brightness: Brightness.dark,
       scaffoldBackgroundColor: _bgMain,
       
-      // Fehler 2 & 3 gelöst: 'background' wurde durch 'surface' ersetzt
       colorScheme: const ColorScheme.dark(
         surface: _bgSurface,
         onSurface: _textPrimary,
@@ -33,8 +32,6 @@ class AppTheme {
         bodySmall: TextStyle(color: _textDisabled),
       ),
 
-      // Fehler 1 gelöst: Der Parameter heißt 'cardTheme', 
-      // aber der Typ muss 'CardThemeData' sein (oder CardTheme nutzen)
       cardTheme: CardThemeData( 
         color: _bgSurface,
         shape: RoundedRectangleBorder(
@@ -43,7 +40,6 @@ class AppTheme {
         ),
       ),
 
-      // Fehler 4 & 5 gelöst: MaterialStateProperty -> WidgetStateProperty
       scrollbarTheme: ScrollbarThemeData(
         thumbColor: WidgetStateProperty.all(_borderColor),
         trackColor: WidgetStateProperty.all(const Color(0xFF050505)),

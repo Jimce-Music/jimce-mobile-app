@@ -32,13 +32,11 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
         child: Column(
           children: [
             const SizedBox(height: 30),
-            // Obere Anzeige der Steps
             OnboardingDotIndicator(
               itemCount: onboardingPages.length,
               currentIndex: _currentPage,
             ),
             
-            // Hauptinhalt (Slider)
             Expanded(
               child: PageView.builder(
                 controller: _pageController,
@@ -48,7 +46,6 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               ),
             ),
 
-            // Button unten
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 40),
               child: _buildButton(),

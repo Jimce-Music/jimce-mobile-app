@@ -22,7 +22,7 @@ class OnboardingDotIndicator extends StatelessWidget {
           duration: const Duration(milliseconds: 300),
           margin: const EdgeInsets.symmetric(horizontal: 4),
           height: 8,
-          width: isActive ? 24 : 8, // Breiterer Punkt wenn aktiv
+          width: isActive ? 24 : 8,
           decoration: BoxDecoration(
             color: isActive ? theme.textTheme.bodyLarge?.color : theme.textTheme.bodySmall?.color,
             borderRadius: BorderRadius.circular(4),
