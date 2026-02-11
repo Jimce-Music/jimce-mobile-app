@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:jimce/screens/home_screen.dart';
+import 'package:jimce/screens/onboarding/setup/login_screen.dart';
 import 'package:jimce/screens/search_screen.dart';
 import 'package:jimce/screens/playlist_screen.dart';
 import 'package:jimce/screens/settings_screen.dart';
@@ -17,7 +18,8 @@ class MyApp extends StatelessWidget {
     final prefs = await SharedPreferences.getInstance();
     return {
       'finishedOnboarding': prefs.getBool('finishedOnboarding') ?? false,
-      'isSettedUp': prefs.getBool('isSettedUp') ?? false,
+      'finishedServerSetup': prefs.getBool('finishedServerSetup') ?? false,
+      'isSetUp': prefs.getBool('isSetUp') ?? false
     };
   }
 
@@ -34,17 +36,21 @@ class MyApp extends StatelessWidget {
           }
 
           final bool finishedOnboarding = snapshot.data?['finishedOnboarding'] ?? false;
-          final bool isSettedUp = snapshot.data?['isSettedUp'] ?? false;
+          final bool finishedServerSetup = snapshot.data?['finishedServerSetup'] ?? false;
+          final bool isSetUp = snapshot.data?['isSetUp'] ?? false;
 
           // Logik-Weiche:
           if (!finishedOnboarding) {
             // 1. Wenn Onboarding nicht fertig -> Onboarding
             return const OnboardingScreen();
-          } else if (!isSettedUp) {
+          } else if (!finishedServerSetup) {
             // 2. Wenn Onboarding fertig, aber kein Server-Setup -> Setup Screen
             return const ServerSetupScreen();
+          } else if (!isSetUp) {
+            // 3. Wenn Server Setup fertig, aber kein Login -> Login Screen
+            return const LoginScreen();
           } else {
-            // 3. Beides erledigt -> Haupt-App
+            // 4. Beides erledigt -> Haupt-App
             return const MainNavigationWrapper();
           }
         },

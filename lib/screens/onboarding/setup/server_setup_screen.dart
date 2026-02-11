@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:jimce/screens/onboarding/setup/login_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:jimce/app.dart';
 import 'package:jimce/screens/onboarding/setup/utils/url_helper.dart';
-import 'package:jimce/screens/onboarding/setup/utils/ping_server.dart';
+import 'package:jimce/services/ping_server.dart';
 
 class ServerSetupScreen extends StatefulWidget {
   const ServerSetupScreen({super.key});
@@ -34,11 +35,11 @@ class _ServerSetupScreenState extends State<ServerSetupScreen> {
     if (isAlive) {
       final prefs = await SharedPreferences.getInstance();
       await prefs.setString('serverUrl', finalUrl);
-      await prefs.setBool('isSettedUp', true);
+      await prefs.setBool('finishedServerSetup', true);
       
       if (!mounted) return;
       Navigator.of(context).pushReplacement(
-        MaterialPageRoute(builder: (context) => const MainNavigationWrapper()),
+        MaterialPageRoute(builder: (context) => const LoginScreen()),
       );
     } else {
       FocusScope.of(context).unfocus();
