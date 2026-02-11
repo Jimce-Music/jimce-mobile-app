@@ -65,7 +65,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           // Placeholder for Picture/Icon
-          const Icon(Icons.music_note_rounded, size: 120, color: Colors.white),
+          Icon(content.icon, size: 120, color: Colors.white),
           const SizedBox(height: 40),
           Text(
             content.title,

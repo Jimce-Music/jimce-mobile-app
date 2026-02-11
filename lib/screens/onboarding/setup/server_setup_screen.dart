@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:jimce/app.dart';
-import 'package:jimce/screens/onboarding/setup/utils/url_helper.dart';     // Pfad anpassen
-import 'package:jimce/screens/onboarding/setup/utils/ping_server.dart'; // Pfad anpassen
+import 'package:jimce/screens/onboarding/setup/utils/url_helper.dart';
+import 'package:jimce/screens/onboarding/setup/utils/ping_server.dart';
 
 class ServerSetupScreen extends StatefulWidget {
   const ServerSetupScreen({super.key});
