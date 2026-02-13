@@ -9,6 +9,7 @@ import 'package:jimce/components/navbar.dart';
 import 'package:jimce/utils/app_theme.dart';
 import 'package:jimce/screens/onboarding/setup/server_setup_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -28,6 +29,15 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: AppTheme.blackTheme,
+      localizationsDelegates: [
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      supportedLocales: [
+        Locale('en'), // English
+        Locale('de'), // Spanish
+      ],
       home: FutureBuilder<Map<String, bool>>(
         future: _checkAppState(),
         builder: (context, snapshot) {
