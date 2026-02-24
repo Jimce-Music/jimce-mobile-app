@@ -35,8 +35,8 @@ class MyApp extends StatelessWidget {
         GlobalCupertinoLocalizations.delegate,
       ],
       supportedLocales: [
-        Locale('en'), // English
-        Locale('de'), // Spanish
+        Locale('en'),
+        Locale('de'),
       ],
       home: FutureBuilder<Map<String, bool>>(
         future: _checkAppState(),
