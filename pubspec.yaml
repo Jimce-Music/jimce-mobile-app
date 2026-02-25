@@ -34,12 +34,12 @@ flutter:
 
 flutter_launcher_icons:
   android: true
-  ios: true
+  # ios: true
   image_path: "assets/icon/logo-no-bg-white-transparent.png"
 
   # Spezifisch für iOS:
-  remove_alpha_ios: true
-  background_color_ios: "#000000" # Hier Schwarz statt Weiß setzen!
+  # remove_alpha_ios: true
+  # background_color_ios: "#000000" # Hier Schwarz statt Weiß setzen!
 
   # Spezifisch für Android:
   adaptive_icon_background: "#000000"
