@@ -42,7 +42,7 @@ class FloatingGlassNavBar extends StatelessWidget {
               child: Container(
                 height: 70,
                 decoration: BoxDecoration(
-                  color: Colors.black.withValues(alpha: 0.7),
+                  color: Colors.black.withValues(alpha: 0.25),
                   borderRadius: BorderRadius.circular(40),
                   border: Border.all(
                     color: borderColor.withValues(alpha: 0.5),
