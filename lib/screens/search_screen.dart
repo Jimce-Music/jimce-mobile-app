@@ -15,11 +15,19 @@ class SearchScreen extends StatefulWidget {
 class SearchScreenState extends State<SearchScreen> {
   late TextEditingController _inputFieldController;
   final FocusNode _searchFocusNode = FocusNode(); // FocusNode hinzufügen
+  bool _isFocused = false;
 
   @override
   void initState() {
     super.initState();
     _inputFieldController = TextEditingController();
+    
+    // Listener für Focus-Änderungen
+    _searchFocusNode.addListener(() {
+      setState(() {
+        _isFocused = _searchFocusNode.hasFocus;
+      });
+    });
   }
 
   // Diese Methode wird von außen aufgerufen
@@ -63,13 +71,22 @@ class SearchScreenState extends State<SearchScreen> {
                   hintStyle: TextStyle(color: theme.textTheme.bodySmall?.color),
                   prefixIcon: Icon(
                     Icons.search,
-                    color: theme.textTheme.bodySmall?.color,
+                    color: _isFocused
+                        ? theme.colorScheme.primary
+                        : theme.textTheme.bodySmall?.color,
                   ),
                   filled: true,
                   fillColor: Colors.white.withValues(alpha: 0.05),
-                  border: OutlineInputBorder(
+                  enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(15),
                     borderSide: BorderSide.none,
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(15),
+                    borderSide: BorderSide(
+                      color: theme.colorScheme.primary,
+                      width: 2,
+                    ),
                   ),
                 ),
               ),
