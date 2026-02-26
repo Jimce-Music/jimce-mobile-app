@@ -32,11 +32,6 @@ class FloatingGlassNavBar extends StatelessWidget {
       padding: EdgeInsets.fromLTRB(20, 0, 20, bottomPadding + 20),
       child: LayoutBuilder(
         builder: (context, constraints) {
-          int itemCount = navItems.length;
-          double totalWidth = constraints.maxWidth;
-          double usableWidth = totalWidth - 20; 
-          double itemWidth = usableWidth / itemCount;
-
           int visualIndex = navItems.indexWhere((item) => item['id'] == currentIndex);
           if (visualIndex == -1) visualIndex = 0;
 

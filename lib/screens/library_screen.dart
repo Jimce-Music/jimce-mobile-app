@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
+class PlaylistScreen extends StatelessWidget {
+  const PlaylistScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Startseite"),
+        title: const Text("Bibliothek"),
         centerTitle: true,
         backgroundColor: Colors.black,
       ),

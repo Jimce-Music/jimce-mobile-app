@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:jimce/screens/home_screen.dart';
 import 'package:jimce/screens/onboarding/setup/login_screen.dart';
 import 'package:jimce/screens/search_screen.dart';
-import 'package:jimce/screens/playlist_screen.dart';
+import 'package:jimce/screens/library_screen.dart';
 import 'package:jimce/screens/settings_screen.dart';
 import 'package:jimce/screens/onboarding/onboarding_screen.dart';
 import 'package:jimce/components/navbar.dart';
@@ -78,22 +78,50 @@ class MainNavigationWrapper extends StatefulWidget {
 
 class _MainNavigationWrapperState extends State<MainNavigationWrapper> {
   int _selectedIndex = 0;
+  
+  // Key für den SearchScreen erstellen
+  final GlobalKey<SearchScreenState> _searchKey = GlobalKey<SearchScreenState>();
 
-  final List<Widget> _pages = [
-    const HomeScreen(),
-    const SearchScreen(),
-    const PlaylistScreen(),
-    const SettingsScreen(),
-  ];
+  // Pages als Methode oder spät initialisierte Liste, damit der Key übergeben werden kann
+  late List<Widget> _pages;
+
+  @override
+  void initState() {
+    super.initState();
+    _pages = [
+      const HomeScreen(),
+      SearchScreen(key: _searchKey), // Key hier übergeben
+      const PlaylistScreen(),
+      const SettingsScreen(),
+    ];
+  }
+
+  void _onItemTapped(int index) {
+    if (_selectedIndex == index) {
+      // Wenn der Nutzer bereits auf der Suche ist (Index 1)
+      if (index == 1) {
+        // Rufe die Methode im SearchScreenState auf
+        _searchKey.currentState?.openKeyboard();
+      }
+    } else {
+      setState(() {
+        _selectedIndex = index;
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       extendBody: true,
-      body: SizedBox.expand(child: _pages[_selectedIndex]),
+      // IndexedStack nutzen, damit der SearchScreen (und sein Key) im Speicher bleibt
+      body: IndexedStack(
+        index: _selectedIndex,
+        children: _pages,
+      ),
       bottomNavigationBar: FloatingGlassNavBar(
         currentIndex: _selectedIndex,
-        onTap: (index) => setState(() => _selectedIndex = index),
+        onTap: _onItemTapped, // Neue Logik-Funktion nutzen
       ),
     );
   }

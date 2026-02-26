@@ -53,18 +53,13 @@ class SettingsScreen extends StatelessWidget {
       backgroundColor: Colors.black,
       appBar: AppBar(
         title: const Text("Einstellungen"),
+        centerTitle: true,
         backgroundColor: Colors.black,
       ),
       body: Padding(
         padding: const EdgeInsets.all(20.0),
         child: Column(
           children: [
-            const Center(
-              child: Text(
-                'Einstellungen verwalten',
-                style: TextStyle(color: Colors.white, fontSize: 20),
-              ),
-            ),
             const Spacer(),
             // Der Reset-Button
             SizedBox(
