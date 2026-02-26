@@ -50,6 +50,8 @@ class _LoginScreenState extends State<LoginScreen> {
         MaterialPageRoute(builder: (context) => const MainNavigationWrapper()),
       );
     } else {
+      if (!mounted) return;
+
       FocusScope.of(context).unfocus();
       setState(() {
         _isLoading = false;
@@ -132,7 +134,7 @@ class _LoginScreenState extends State<LoginScreen> {
       prefixIcon: Icon(icon, color: Colors.white54),
       hintStyle: const TextStyle(color: Colors.white24),
       filled: true,
-      fillColor: Colors.white.withOpacity(0.05),
+      fillColor: Colors.white.withValues(alpha: 0.05),
       border: OutlineInputBorder(borderRadius: BorderRadius.circular(15), borderSide: BorderSide.none),
     );
   }

@@ -64,7 +64,7 @@ class SearchScreenState extends State<SearchScreen> {
                     color: theme.textTheme.bodySmall?.color,
                   ),
                   filled: true,
-                  fillColor: Colors.white.withOpacity(0.05),
+                  fillColor: Colors.white.withValues(alpha: 0.05),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(15),
                     borderSide: BorderSide.none,
