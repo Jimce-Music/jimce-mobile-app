@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:jimce/gen_l10n/app_localizations.dart';
 
 // search_screen.dart
 
@@ -36,12 +37,13 @@ class SearchScreenState extends State<SearchScreen> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final l10n = AppLocalizations.of(context)!;
 
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
         appBar: AppBar(
-          title: const Text("Suchen"),
+          title: Text(l10n.searchTab),
           centerTitle: true,
           backgroundColor: Colors.black,
         ),
@@ -57,7 +59,7 @@ class SearchScreenState extends State<SearchScreen> {
                 keyboardType: TextInputType.text,
                 autocorrect: false,
                 decoration: InputDecoration(
-                  hintText: "Song oder Künstler suchen...",
+                  hintText: l10n.searchHint,
                   hintStyle: TextStyle(color: theme.textTheme.bodySmall?.color),
                   prefixIcon: Icon(
                     Icons.search,

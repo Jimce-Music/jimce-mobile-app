@@ -3,6 +3,7 @@ import 'package:jimce/screens/onboarding/setup/server_setup_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:jimce/screens/onboarding/onboarding_data.dart';
 import 'package:jimce/screens/onboarding/onboarding_dot_indicator.dart';
+import 'package:jimce/gen_l10n/app_localizations.dart';
 
 class OnboardingScreen extends StatefulWidget {
   const OnboardingScreen({super.key});
@@ -58,6 +59,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
 
   Widget _buildPage(OnboardingContent content) {
     final theme = Theme.of(context);
+    final l10n = AppLocalizations.of(context)!;
 
     return Padding(
       padding: const EdgeInsets.all(40.0),
@@ -68,13 +70,13 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
           Icon(content.icon, size: 120, color: Colors.white),
           const SizedBox(height: 40),
           Text(
-            content.title,
+            content.getTitle(l10n),
             style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold, color: theme.textTheme.bodyLarge?.color),
             textAlign: TextAlign.center,
           ),
           const SizedBox(height: 20),
           Text(
-            content.description,
+            content.getDescription(l10n),
             style: TextStyle(fontSize: 16, color: theme.textTheme.bodyMedium?.color),
             textAlign: TextAlign.center,
           ),
@@ -85,6 +87,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
 
   Widget _buildButton() {
     final theme = Theme.of(context);
+    final l10n = AppLocalizations.of(context)!;
 
     bool isLastPage = _currentPage == onboardingPages.length - 1;
     return SizedBox(
@@ -107,7 +110,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
           }
         },
         child: Text(
-          isLastPage ? "LOS GEHT'S" : "WEITER",
+          isLastPage ? l10n.letsGo : l10n.next,
           style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
         ),
       ),

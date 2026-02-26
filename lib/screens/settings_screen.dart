@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:jimce/screens/onboarding/onboarding_screen.dart';
+import 'package:jimce/gen_l10n/app_localizations.dart';
 
 class SettingsScreen extends StatelessWidget {
   const SettingsScreen({super.key});
@@ -21,26 +22,28 @@ class SettingsScreen extends StatelessWidget {
   }
 
   void _showResetDialog(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+    
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
         backgroundColor: Colors.grey[900],
-        title: const Text("App zurücksetzen?", style: TextStyle(color: Colors.white)),
-        content: const Text(
-          "Alle Einstellungen und die Server-Verbindung werden gelöscht.",
-          style: TextStyle(color: Colors.white70),
+        title: Text(l10n.resetAppTitle, style: const TextStyle(color: Colors.white)),
+        content: Text(
+          l10n.resetAppMessage,
+          style: const TextStyle(color: Colors.white70),
         ),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: const Text("Abbrechen"),
+            child: Text(l10n.cancel),
           ),
           TextButton(
             onPressed: () {
               Navigator.pop(context);
               _resetApp(context);
             },
-            child: const Text("Zurücksetzen", style: TextStyle(color: Colors.red)),
+            child: Text(l10n.reset, style: const TextStyle(color: Colors.red)),
           ),
         ],
       ),
@@ -49,10 +52,12 @@ class SettingsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+    
     return Scaffold(
       backgroundColor: Colors.black,
       appBar: AppBar(
-        title: const Text("Einstellungen"),
+        title: Text(l10n.settingsTab),
         centerTitle: true,
         backgroundColor: Colors.black,
       ),
@@ -73,7 +78,7 @@ class SettingsScreen extends StatelessWidget {
                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
                 ),
                 onPressed: () => _showResetDialog(context),
-                child: const Text("APP ZURÜCKSETZEN", style: TextStyle(fontWeight: FontWeight.bold)),
+                child: Text(l10n.resetAppButton, style: const TextStyle(fontWeight: FontWeight.bold)),
               ),
             ),
             const SizedBox(height: 100), // Platz für die Navbar

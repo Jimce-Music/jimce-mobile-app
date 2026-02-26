@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:jimce/gen_l10n/app_localizations.dart';
 
 class PlaylistScreen extends StatelessWidget {
   const PlaylistScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+    
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Bibliothek"),
+        title: Text(l10n.libraryTab),
         centerTitle: true,
         backgroundColor: Colors.black,
       ),

@@ -3,6 +3,7 @@ import 'package:jimce/screens/onboarding/setup/login_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:jimce/screens/onboarding/setup/utils/url_helper.dart';
 import 'package:jimce/services/ping_server.dart';
+import 'package:jimce/gen_l10n/app_localizations.dart';
 
 class ServerSetupScreen extends StatefulWidget {
   const ServerSetupScreen({super.key});
@@ -46,7 +47,8 @@ class _ServerSetupScreenState extends State<ServerSetupScreen> {
       FocusScope.of(context).unfocus();
 
       setState(() {
-        _errorMessage = "Verbindung zum Server fehlgeschlagen.";
+        final l10n = AppLocalizations.of(context)!;
+        _errorMessage = l10n.serverConnectionFailed;
         _isChecking = false;
       });
     }
@@ -55,6 +57,7 @@ class _ServerSetupScreenState extends State<ServerSetupScreen> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final l10n = AppLocalizations.of(context)!;
 
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
@@ -81,7 +84,7 @@ class _ServerSetupScreenState extends State<ServerSetupScreen> {
                           const Icon(Icons.dns_rounded, size: 100, color: Colors.white),
                           const SizedBox(height: 30),
                           Text(
-                            "Server einrichten",
+                            l10n.serverSetupTitle,
                             style: TextStyle(
                               fontSize: 28, 
                               fontWeight: FontWeight.bold, 
@@ -90,7 +93,7 @@ class _ServerSetupScreenState extends State<ServerSetupScreen> {
                           ),
                           const SizedBox(height: 15),
                           Text(
-                            "Verbinde die App mit deinem Jimce-Server.",
+                            l10n.serverSetupDescription,
                             textAlign: TextAlign.center,
                             style: TextStyle(color: theme.textTheme.bodyMedium?.color),
                           ),
@@ -101,7 +104,7 @@ class _ServerSetupScreenState extends State<ServerSetupScreen> {
                             keyboardType: TextInputType.url,
                             autocorrect: false,
                             decoration: InputDecoration(
-                              hintText: "https://dein-server.de",
+                              hintText: l10n.serverUrlHint,
                               hintStyle: TextStyle(color: theme.textTheme.bodySmall?.color),
                               filled: true,
                               fillColor: Colors.white.withValues(alpha: 0.05),
@@ -127,7 +130,7 @@ class _ServerSetupScreenState extends State<ServerSetupScreen> {
                                     width: 20, 
                                     child: CircularProgressIndicator(strokeWidth: 2, color: Colors.black)
                                   )
-                                : const Text("VERBINDEN", style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black)),
+                                : Text(l10n.connect, style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.black)),
                             ),
                           ),
                           

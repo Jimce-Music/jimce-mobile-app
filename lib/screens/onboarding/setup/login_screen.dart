@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:jimce/services/auth_service.dart';
 import 'package:jimce/app.dart';
+import 'package:jimce/gen_l10n/app_localizations.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -18,8 +19,10 @@ class _LoginScreenState extends State<LoginScreen> {
   String? _errorMessage;
 
   Future<void> _handleLogin() async {
+    final l10n = AppLocalizations.of(context)!;
+    
     if (_userController.text.isEmpty || _passController.text.isEmpty) {
-      setState(() => _errorMessage = "Bitte fülle alle Felder aus.");
+      setState(() => _errorMessage = l10n.fillAllFields);
       return;
     }
 
@@ -52,10 +55,11 @@ class _LoginScreenState extends State<LoginScreen> {
     } else {
       if (!mounted) return;
 
+      final l10n = AppLocalizations.of(context)!;
       FocusScope.of(context).unfocus();
       setState(() {
         _isLoading = false;
-        _errorMessage = "Benutzername oder Passwort falsch.";
+        _errorMessage = l10n.invalidCredentials;
       });
     }
   }
@@ -63,6 +67,7 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final l10n = AppLocalizations.of(context)!;
 
     return Scaffold(
       body: SafeArea(
@@ -74,14 +79,14 @@ class _LoginScreenState extends State<LoginScreen> {
               children: [
                 const Icon(Icons.lock_person_rounded, size: 80, color: Colors.white),
                 const SizedBox(height: 20),
-                const Text("Login", style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold, color: Colors.white)),
+                Text(l10n.loginTitle, style: const TextStyle(fontSize: 32, fontWeight: FontWeight.bold, color: Colors.white)),
                 const SizedBox(height: 40),
 
                 // Benutzername
                 TextField(
                   controller: _userController,
                   style: const TextStyle(color: Colors.white),
-                  decoration: _inputDecoration("Benutzername", Icons.person_outline),
+                  decoration: _inputDecoration(l10n.username, Icons.person_outline),
                 ),
                 const SizedBox(height: 20),
 
@@ -90,7 +95,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   controller: _passController,
                   obscureText: _isObscured,
                   style: const TextStyle(color: Colors.white),
-                  decoration: _inputDecoration("Passwort", Icons.lock_outline).copyWith(
+                  decoration: _inputDecoration(l10n.password, Icons.lock_outline).copyWith(
                     suffixIcon: IconButton(
                       icon: Icon(_isObscured ? Icons.visibility_off : Icons.visibility, color: Colors.white54),
                       onPressed: () => setState(() => _isObscured = !_isObscured),
@@ -111,7 +116,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     onPressed: _isLoading ? null : _handleLogin,
                     child: _isLoading 
                       ? const CircularProgressIndicator(color: Colors.black)
-                      : const Text("ANMELDEN", style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold)),
+                      : Text(l10n.signIn, style: const TextStyle(color: Colors.black, fontWeight: FontWeight.bold)),
                   ),
                 ),
 
