@@ -11,15 +11,16 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  shared_preferences: ^2.2.0
+  shared_preferences: ^2.5.5
   flutter_localizations:
     sdk: flutter
 
-  cupertino_icons: ^1.0.8
+  cupertino_icons: ^1.0.9
   flutter_launcher_icons: ^0.14.4
   shake_animation_widget: ^3.0.4
   http: ^1.6.0
   intl: ^0.20.2
+  jimce_api_flutter: ^0.0.2
 
 dev_dependencies:
   flutter_test:

@@ -4,6 +4,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:jimce/screens/onboarding/setup/utils/url_helper.dart';
 import 'package:jimce/services/ping_server.dart';
 import 'package:jimce/gen_l10n/app_localizations.dart';
+import 'package:jimce/utils/init_api.dart';
 
 class ServerSetupScreen extends StatefulWidget {
   const ServerSetupScreen({super.key});
@@ -34,7 +35,7 @@ class _ServerSetupScreenState extends State<ServerSetupScreen> {
 
     if (isAlive) {
       final prefs = await SharedPreferences.getInstance();
-      await prefs.setString('serverUrl', finalUrl);
+      await setApiServerUrl(finalUrl);
       await prefs.setBool('finishedServerSetup', true);
       
       if (!mounted) return;

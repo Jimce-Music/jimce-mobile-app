@@ -3,6 +3,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:jimce/services/auth_service.dart';
 import 'package:jimce/app.dart';
 import 'package:jimce/gen_l10n/app_localizations.dart';
+import 'package:jimce/utils/init_api.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -32,18 +33,16 @@ class _LoginScreenState extends State<LoginScreen> {
     });
 
     final prefs = await SharedPreferences.getInstance();
-    final serverUrl = prefs.getString('serverUrl') ?? "";
 
     // 1. Login-Anfrage senden und Token erhalten
-    final String? token = await AuthService.login(
-      serverUrl, 
+    final loginResult = await AuthService.login(
       _userController.text, 
       _passController.text
     );
 
-    if (token != null) {
-      // 2. Token in SharedPreferences speichern
-      await prefs.setString('userToken', token);
+    if (loginResult.isSuccess && loginResult.token != null) {
+      // 2. Token zentral speichern und API aktualisieren
+      await setApiAuthToken(loginResult.token);
       await prefs.setBool('isSetUp', true);
       
       if (!mounted) return;
@@ -56,10 +55,16 @@ class _LoginScreenState extends State<LoginScreen> {
       if (!mounted) return;
 
       final l10n = AppLocalizations.of(context)!;
+      final errorText = switch (loginResult.failureReason) {
+        LoginFailureReason.invalidCredentials => l10n.invalidCredentials,
+        LoginFailureReason.serverUnreachable => l10n.serverConnectionFailed,
+        LoginFailureReason.unknown || null => l10n.serverConnectionFailed,
+      };
+
       FocusScope.of(context).unfocus();
       setState(() {
         _isLoading = false;
-        _errorMessage = l10n.invalidCredentials;
+        _errorMessage = errorText;
       });
     }
   }

@@ -10,6 +10,7 @@ import 'package:jimce/utils/app_theme.dart';
 import 'package:jimce/screens/onboarding/setup/server_setup_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:jimce/gen_l10n/app_localizations.dart';
+import 'package:jimce/utils/init_api.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -17,6 +18,8 @@ class MyApp extends StatelessWidget {
   // Prüft jetzt beide Status-Werte
   Future<Map<String, bool>> _checkAppState() async {
     final prefs = await SharedPreferences.getInstance();
+    await initializeApiFromStorage();
+
     return {
       'finishedOnboarding': prefs.getBool('finishedOnboarding') ?? false,
       'finishedServerSetup': prefs.getBool('finishedServerSetup') ?? false,
