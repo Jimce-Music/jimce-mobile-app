@@ -259,6 +259,180 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Username or password incorrect.'**
   String get invalidCredentials;
+
+  /// No description provided for @settingsGroupGeneral.
+  ///
+  /// In en, this message translates to:
+  /// **'General'**
+  String get settingsGroupGeneral;
+
+  /// No description provided for @settingsGroupPlayback.
+  ///
+  /// In en, this message translates to:
+  /// **'Playback'**
+  String get settingsGroupPlayback;
+
+  /// No description provided for @settingsGroupLibrary.
+  ///
+  /// In en, this message translates to:
+  /// **'Library'**
+  String get settingsGroupLibrary;
+
+  /// No description provided for @settingsMenuAccount.
+  ///
+  /// In en, this message translates to:
+  /// **'Account'**
+  String get settingsMenuAccount;
+
+  /// No description provided for @settingsMenuDesign.
+  ///
+  /// In en, this message translates to:
+  /// **'Design'**
+  String get settingsMenuDesign;
+
+  /// No description provided for @settingsMenuLanguage.
+  ///
+  /// In en, this message translates to:
+  /// **'Language'**
+  String get settingsMenuLanguage;
+
+  /// No description provided for @settingsMenuAutoplay.
+  ///
+  /// In en, this message translates to:
+  /// **'Autoplay'**
+  String get settingsMenuAutoplay;
+
+  /// No description provided for @settingsMenuCrossfade.
+  ///
+  /// In en, this message translates to:
+  /// **'Crossfade'**
+  String get settingsMenuCrossfade;
+
+  /// No description provided for @settingsMenuDownloads.
+  ///
+  /// In en, this message translates to:
+  /// **'Downloads'**
+  String get settingsMenuDownloads;
+
+  /// No description provided for @settingsMenuAboutJimce.
+  ///
+  /// In en, this message translates to:
+  /// **'About Jimce'**
+  String get settingsMenuAboutJimce;
+
+  /// No description provided for @settingsMenuHelp.
+  ///
+  /// In en, this message translates to:
+  /// **'Help'**
+  String get settingsMenuHelp;
+
+  /// No description provided for @settingsChangePasswordTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Change password'**
+  String get settingsChangePasswordTitle;
+
+  /// No description provided for @settingsPasswordHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Password'**
+  String get settingsPasswordHint;
+
+  /// No description provided for @settingsConfirmPasswordHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Confirm password'**
+  String get settingsConfirmPasswordHint;
+
+  /// No description provided for @settingsChangePasswordButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Change password'**
+  String get settingsChangePasswordButton;
+
+  /// No description provided for @settingsThemeBlack.
+  ///
+  /// In en, this message translates to:
+  /// **'Theme: Black'**
+  String get settingsThemeBlack;
+
+  /// No description provided for @settingsLanguageGerman.
+  ///
+  /// In en, this message translates to:
+  /// **'Language: German'**
+  String get settingsLanguageGerman;
+
+  /// No description provided for @settingsAutoplayTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Autoplay'**
+  String get settingsAutoplayTitle;
+
+  /// No description provided for @settingsAutoplayDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Automatically play similar songs'**
+  String get settingsAutoplayDescription;
+
+  /// No description provided for @settingsCrossfadeSongs.
+  ///
+  /// In en, this message translates to:
+  /// **'Crossfade songs'**
+  String get settingsCrossfadeSongs;
+
+  /// No description provided for @settingsDownloadsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Downloads'**
+  String get settingsDownloadsTitle;
+
+  /// No description provided for @settingsDownloadsWifiOnly.
+  ///
+  /// In en, this message translates to:
+  /// **'Download only on Wi-Fi'**
+  String get settingsDownloadsWifiOnly;
+
+  /// No description provided for @settingsDownloadQualityHigh.
+  ///
+  /// In en, this message translates to:
+  /// **'Download quality: High'**
+  String get settingsDownloadQualityHigh;
+
+  /// No description provided for @settingsAboutJimceTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'About Jimce'**
+  String get settingsAboutJimceTitle;
+
+  /// No description provided for @settingsAboutJimceDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Information about app version, development, and licenses.'**
+  String get settingsAboutJimceDescription;
+
+  /// No description provided for @settingsAboutJimceAction.
+  ///
+  /// In en, this message translates to:
+  /// **'Open app information'**
+  String get settingsAboutJimceAction;
+
+  /// No description provided for @settingsHelpTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Help'**
+  String get settingsHelpTitle;
+
+  /// No description provided for @settingsHelpFaq.
+  ///
+  /// In en, this message translates to:
+  /// **'Frequently asked questions'**
+  String get settingsHelpFaq;
+
+  /// No description provided for @settingsHelpContact.
+  ///
+  /// In en, this message translates to:
+  /// **'Contact support'**
+  String get settingsHelpContact;
 }
 
 class _AppLocalizationsDelegate

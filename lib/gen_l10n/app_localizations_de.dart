@@ -91,4 +91,93 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get invalidCredentials => 'Benutzername oder Passwort falsch.';
+
+  @override
+  String get settingsGroupGeneral => 'Allgemein';
+
+  @override
+  String get settingsGroupPlayback => 'Wiedergabe';
+
+  @override
+  String get settingsGroupLibrary => 'Bibliothek';
+
+  @override
+  String get settingsMenuAccount => 'Konto';
+
+  @override
+  String get settingsMenuDesign => 'Design';
+
+  @override
+  String get settingsMenuLanguage => 'Sprache';
+
+  @override
+  String get settingsMenuAutoplay => 'Autoplay';
+
+  @override
+  String get settingsMenuCrossfade => 'Überblenden';
+
+  @override
+  String get settingsMenuDownloads => 'Downloads';
+
+  @override
+  String get settingsMenuAboutJimce => 'Über Jimce';
+
+  @override
+  String get settingsMenuHelp => 'Hilfe';
+
+  @override
+  String get settingsChangePasswordTitle => 'Passwort ändern';
+
+  @override
+  String get settingsPasswordHint => 'Passwort';
+
+  @override
+  String get settingsConfirmPasswordHint => 'Passwort bestätigen';
+
+  @override
+  String get settingsChangePasswordButton => 'Passwort ändern';
+
+  @override
+  String get settingsThemeBlack => 'Thema: Schwarz';
+
+  @override
+  String get settingsLanguageGerman => 'Sprache: Deutsch';
+
+  @override
+  String get settingsAutoplayTitle => 'Autoplay';
+
+  @override
+  String get settingsAutoplayDescription =>
+      'Ähnliche Songs automatisch wiedergeben';
+
+  @override
+  String get settingsCrossfadeSongs => 'Songs überblenden';
+
+  @override
+  String get settingsDownloadsTitle => 'Downloads';
+
+  @override
+  String get settingsDownloadsWifiOnly => 'Nur über WLAN herunterladen';
+
+  @override
+  String get settingsDownloadQualityHigh => 'Download-Qualität: Hoch';
+
+  @override
+  String get settingsAboutJimceTitle => 'Über Jimce';
+
+  @override
+  String get settingsAboutJimceDescription =>
+      'Informationen zur App-Version, Entwicklung und Lizenzierung.';
+
+  @override
+  String get settingsAboutJimceAction => 'App-Informationen öffnen';
+
+  @override
+  String get settingsHelpTitle => 'Hilfe';
+
+  @override
+  String get settingsHelpFaq => 'Häufige Fragen';
+
+  @override
+  String get settingsHelpContact => 'Support kontaktieren';
 }

@@ -32,58 +32,77 @@ class FloatingGlassNavBar extends StatelessWidget {
       padding: EdgeInsets.fromLTRB(20, 0, 20, bottomPadding + 20),
       child: LayoutBuilder(
         builder: (context, constraints) {
-          int visualIndex = navItems.indexWhere((item) => item['id'] == currentIndex);
-          if (visualIndex == -1) visualIndex = 0;
+          final borderRadius = BorderRadius.circular(40);
 
           return ClipRRect(
-            borderRadius: BorderRadius.circular(40),
-            child: BackdropFilter(
-              filter: ImageFilter.blur(sigmaX: 15, sigmaY: 15),
-              child: Container(
-                height: 70,
-                decoration: BoxDecoration(
-                  color: Colors.black.withValues(alpha: 0.25),
-                  borderRadius: BorderRadius.circular(40),
-                  border: Border.all(
-                    color: borderColor.withValues(alpha: 0.5),
-                    width: 1.5,
+            borderRadius: borderRadius,
+            child: Container(
+              height: 70,
+              decoration: BoxDecoration(
+                borderRadius: borderRadius,
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withValues(alpha: 0.14),
+                    blurRadius: 12,
+                    offset: const Offset(0, 6),
                   ),
-                ),
-                // Das Padding hier sorgt dafür, dass die Pille den Border nie berührt
-                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10), 
-                child: LayoutBuilder(
-                  builder: (context, constraints) {
-                    // Die Breite basiert jetzt auf dem bereits reduzierten Platz
-                    double itemWidth = constraints.maxWidth / navItems.length;
-                    int visualIndex = navItems.indexWhere((item) => item['id'] == currentIndex);
-                    if (visualIndex == -1) visualIndex = 0;
+                ],
+              ),
+              child: Stack(
+                fit: StackFit.expand,
+                children: [
+                  BackdropFilter(
+                    filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+                    child: const SizedBox.expand(),
+                  ),
+                  DecoratedBox(
+                    decoration: BoxDecoration(
+                      borderRadius: borderRadius,
+                      color: Colors.black.withValues(alpha: 0.38),
+                      border: Border.all(
+                        color: borderColor.withValues(alpha: 0.24),
+                        width: 1,
+                      ),
+                    ),
+                  ),
+                  // Das Padding hier sorgt dafür, dass die Pille den Border nie berührt
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                    child: LayoutBuilder(
+                      builder: (context, constraints) {
+                        // Die Breite basiert jetzt auf dem bereits reduzierten Platz
+                        final itemWidth = constraints.maxWidth / navItems.length;
+                        int visualIndex = navItems.indexWhere((item) => item['id'] == currentIndex);
+                        if (visualIndex == -1) visualIndex = 0;
 
-                    return Stack(
-                      clipBehavior: Clip.none, // Verhindert unschöne Abschneidungen
-                      children: [
-                        AnimatedPositioned(
-                          duration: const Duration(milliseconds: 350),
-                          curve: Curves.easeOutBack,
-                          left: visualIndex * itemWidth,
-                          top: 0,
-                          bottom: 0, // Pille füllt die vertikale Höhe des Paddings aus
-                          child: Container(
-                            width: itemWidth,
-                            decoration: BoxDecoration(
-                              color: accentColor.withValues(alpha: 0.15),
-                              borderRadius: BorderRadius.circular(30),
+                        return Stack(
+                          clipBehavior: Clip.none, // Verhindert unschöne Abschneidungen
+                          children: [
+                            AnimatedPositioned(
+                              duration: const Duration(milliseconds: 350),
+                              curve: Curves.easeOutBack,
+                              left: visualIndex * itemWidth,
+                              top: 0,
+                              bottom: 0, // Pille füllt die vertikale Höhe des Paddings aus
+                              child: Container(
+                                width: itemWidth,
+                                decoration: BoxDecoration(
+                                  color: accentColor.withValues(alpha: 0.16),
+                                  borderRadius: BorderRadius.circular(30),
+                                ),
+                              ),
                             ),
-                          ),
-                        ),
-                        Row(
-                          children: navItems.map((item) {
-                            return _buildNavItem(context, id: item['id'], icon: item['icon']);
-                          }).toList(),
-                        ),
-                      ],
-                    );
-                  },
-                ),
+                            Row(
+                              children: navItems.map((item) {
+                                return _buildNavItem(context, id: item['id'], icon: item['icon']);
+                              }).toList(),
+                            ),
+                          ],
+                        );
+                      },
+                    ),
+                  ),
+                ],
               ),
             ),
           );

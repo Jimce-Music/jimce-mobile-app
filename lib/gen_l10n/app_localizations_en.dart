@@ -90,4 +90,92 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get invalidCredentials => 'Username or password incorrect.';
+
+  @override
+  String get settingsGroupGeneral => 'General';
+
+  @override
+  String get settingsGroupPlayback => 'Playback';
+
+  @override
+  String get settingsGroupLibrary => 'Library';
+
+  @override
+  String get settingsMenuAccount => 'Account';
+
+  @override
+  String get settingsMenuDesign => 'Design';
+
+  @override
+  String get settingsMenuLanguage => 'Language';
+
+  @override
+  String get settingsMenuAutoplay => 'Autoplay';
+
+  @override
+  String get settingsMenuCrossfade => 'Crossfade';
+
+  @override
+  String get settingsMenuDownloads => 'Downloads';
+
+  @override
+  String get settingsMenuAboutJimce => 'About Jimce';
+
+  @override
+  String get settingsMenuHelp => 'Help';
+
+  @override
+  String get settingsChangePasswordTitle => 'Change password';
+
+  @override
+  String get settingsPasswordHint => 'Password';
+
+  @override
+  String get settingsConfirmPasswordHint => 'Confirm password';
+
+  @override
+  String get settingsChangePasswordButton => 'Change password';
+
+  @override
+  String get settingsThemeBlack => 'Theme: Black';
+
+  @override
+  String get settingsLanguageGerman => 'Language: German';
+
+  @override
+  String get settingsAutoplayTitle => 'Autoplay';
+
+  @override
+  String get settingsAutoplayDescription => 'Automatically play similar songs';
+
+  @override
+  String get settingsCrossfadeSongs => 'Crossfade songs';
+
+  @override
+  String get settingsDownloadsTitle => 'Downloads';
+
+  @override
+  String get settingsDownloadsWifiOnly => 'Download only on Wi-Fi';
+
+  @override
+  String get settingsDownloadQualityHigh => 'Download quality: High';
+
+  @override
+  String get settingsAboutJimceTitle => 'About Jimce';
+
+  @override
+  String get settingsAboutJimceDescription =>
+      'Information about app version, development, and licenses.';
+
+  @override
+  String get settingsAboutJimceAction => 'Open app information';
+
+  @override
+  String get settingsHelpTitle => 'Help';
+
+  @override
+  String get settingsHelpFaq => 'Frequently asked questions';
+
+  @override
+  String get settingsHelpContact => 'Contact support';
 }
